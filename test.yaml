@@ -1,0 +1,6 @@
+name: basic-rules
+rules:
+  - name: go-routines
+    expr: go_routines
+  - name: alert-on
+    expr: AlwaysFiring
