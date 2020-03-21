@@ -1,4 +1,4 @@
-name: basic-rules
+name: basic-rules now # hey line-comment
 rules:
   - name: go-routines
     expr: go_routines
