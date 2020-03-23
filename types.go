@@ -14,6 +14,11 @@ type rulesNode struct {
 	Expression yaml.Node `yaml:"expression"`
 }
 
+type rulesNodePtr struct {
+	Name       *yaml.Node `yaml:"name"`
+	Expression *yaml.Node `yaml:"expression"`
+}
+
 type group struct {
 	Name  string  `yaml:"name"`
 	Rules []rules `yaml:"rules"`
@@ -22,4 +27,9 @@ type group struct {
 type groupNode struct {
 	Name  yaml.Node   `yaml:"name"`
 	Rules []rulesNode `yaml:"rules"`
+}
+
+type groupNodePtr struct {
+	Name  *yaml.Node     `yaml:"name"`
+	Rules []rulesNodePtr `yaml:"rules"`
 }
