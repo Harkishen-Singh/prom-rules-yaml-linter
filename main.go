@@ -66,14 +66,14 @@ func getAddressedNode(n groupNode) (inst groupNodePtr) {
 	for _, r := range n.Rules {
 		tmp := rulesNodePtr{
 			Name: &yaml.Node{
-				Kind: yaml.ScalarNode,
+				Kind:        yaml.ScalarNode,
 				LineComment: r.Name.LineComment,
 				HeadComment: r.Name.HeadComment,
 				FootComment: r.Name.FootComment,
 				Value:       r.Name.Value,
 			},
 			Expression: &yaml.Node{
-				Kind: yaml.ScalarNode,
+				Kind:        yaml.ScalarNode,
 				LineComment: r.Expression.LineComment,
 				HeadComment: r.Expression.HeadComment,
 				FootComment: r.Expression.FootComment,
@@ -86,7 +86,7 @@ func getAddressedNode(n groupNode) (inst groupNodePtr) {
 
 	inst = groupNodePtr{
 		Name: &yaml.Node{
-			Kind: yaml.ScalarNode,
+			Kind:        yaml.ScalarNode,
 			LineComment: n.Name.LineComment,
 			HeadComment: n.Name.HeadComment,
 			FootComment: n.Name.FootComment,
