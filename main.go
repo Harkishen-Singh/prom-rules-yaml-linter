@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bytes"
+	// "bytes"
 	"fmt"
 	// "io"
 	"io/ioutil"
@@ -31,38 +31,49 @@ func process(fileName string) error {
 	}
 
 	var (
-		g     group
-		gNode groupNode
+		// g     group
+		gNode yaml.Node
 	)
 	fmt.Println("crossed this")
-	if err := yaml.Unmarshal(b, &g); err != nil {
-		return fmt.Errorf("UNMARSHAL_ERROR: %s", err.Error())
-	}
+	// if err := yaml.Unmarshal(b, &g); err != nil {
+	// 	return fmt.Errorf("UNMARSHAL_ERROR: %s", err.Error())
+	// }
 
 	if err := yaml.Unmarshal(b, &gNode); err != nil {
 		return fmt.Errorf("UNMARSHAL_ERROR_NODE: %s", err.Error())
 	}
 
-	var buffer bytes.Buffer
+	fmt.Println("----------------------------")
+	// fmt.Println(gNode)
+	// var buffer bytes.Buffer
 
-	addressedNode := getAddressedNode(gNode)
-	fmt.Println(addressedNode)
+	// addressedNode := getAddressedNode(gNode)
+	// fmt.Println(addressedNode)
 
-	if err := yaml.NewEncoder(&buffer).Encode(addressedNode); err != nil {
+	// if err := yaml.NewEncoder(&buffer).Encode(addressedNode); err != nil {
+	// 	panic(err)
+	// }
+
+	// fmt.Println("is this working?")
+	// fmt.Println(buffer.String())
+
+	// reWrite([]byte(buffer.String()), fileName)
+
+	bb, err := yaml.Marshal(&gNode)
+	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println("is this working?")
-	fmt.Println(buffer.String())
+	fmt.Println(string(bb))
 
-	reWrite(&g, &gNode, fileName)
+	reWrite(bb, fileName)
 
 	return nil
 }
 
 func getAddressedNode(n groupNode) (inst groupNodePtr) {
 
-	var ptr []rulesNodePtr
+	var ptr []*rulesNodePtr
 	for _, r := range n.Rules {
 		tmp := rulesNodePtr{
 			Name: &yaml.Node{
@@ -81,9 +92,13 @@ func getAddressedNode(n groupNode) (inst groupNodePtr) {
 			},
 		}
 
-		ptr = append(ptr, tmp)
+		ptr = append(ptr, &tmp)
 	}
 
+	fmt.Println("details below")
+	fmt.Println(n.Name.HeadComment)
+	fmt.Println(n.Name.LineComment)
+	fmt.Println(n.Name.FootComment)
 	inst = groupNodePtr{
 		Name: &yaml.Node{
 			Kind:        yaml.ScalarNode,
@@ -100,22 +115,10 @@ func getAddressedNode(n groupNode) (inst groupNodePtr) {
 
 // reWrite flushes the group content into the file
 // thereby maintaining the recommended YAML syntax structure.
-func reWrite(grp *group, node *groupNode, fileName string) error {
-	if grp != nil {
-		b, err := yaml.Marshal(*grp)
+func reWrite(b []byte, fileName string) error {
 
-		// apply in-line comment
-		// bStr := string(b)
-		// bStr = strings.ReplaceAll(bStr, grp.Name, grp.Name+" "+node.Name.LineComment)
-		// b = []byte(bStr)
-
-		if err != nil {
-			return fmt.Errorf("MARSHALL_ERROR: %v", *grp)
-		}
-
-		if err = ioutil.WriteFile(fileName, b, 0777); err != nil {
-			return err
-		}
+	if err := ioutil.WriteFile(fileName, b, 0777); err != nil {
+		return err
 	}
 
 	return nil

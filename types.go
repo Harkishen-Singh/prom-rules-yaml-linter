@@ -31,5 +31,5 @@ type groupNode struct {
 
 type groupNodePtr struct {
 	Name  *yaml.Node     `yaml:"name"`
-	Rules []rulesNodePtr `yaml:"rules"`
+	Rules []*rulesNodePtr `yaml:"rules"`
 }

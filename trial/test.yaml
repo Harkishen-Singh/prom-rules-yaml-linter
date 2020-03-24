@@ -1,8 +1,7 @@
-# comment head
 name: somename # kkkkkkkkkk
-# hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 rules:
   - name: aaaa
     expression: eeee
+#      ghghcghcccgcccg
   - name: bbbbb
     expression: rrr
