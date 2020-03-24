@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	yaml "gopkg.in/yaml.v3"
+	"io/ioutil"
 )
 
 type group struct {
-	Name string `yaml:"name"`
+	Name string    `yaml:"name"`
 	Type yaml.Node `yaml:"type"`
 }
 

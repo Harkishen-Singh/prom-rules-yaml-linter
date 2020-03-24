@@ -30,6 +30,6 @@ type groupNode struct {
 }
 
 type groupNodePtr struct {
-	Name  *yaml.Node     `yaml:"name"`
+	Name  *yaml.Node      `yaml:"name"`
 	Rules []*rulesNodePtr `yaml:"rules"`
 }
