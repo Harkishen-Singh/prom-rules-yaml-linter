@@ -1,8 +1,12 @@
-# comment head
-name: somename # kkkkkkkkkk
-# hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+# name denotes the name of this file group, head comment
+name: rules-test-comment-rendering # this is a line comment
+# rules are list of expressions with some names, foot comment for name
 rules:
-  - name: aaaa
-    expression: eeee
-  - name: bbbbb
-    expression: rrr
+  - name: rule-go-routine
+    expression: go_goroutines
+  - name: heap-go
+    expression: heap # this is the heap expression
+    # the rule shows the stats now
+  - name: mem-stats
+    expression: go_memstats_heap_alloc_bytes
+# ending note

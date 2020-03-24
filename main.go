@@ -15,7 +15,6 @@ func main() {
 		if err := process(fileName); err != nil {
 			panic(err)
 		}
-
 	}
 }
 
